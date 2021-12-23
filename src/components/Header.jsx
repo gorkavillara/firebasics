@@ -22,7 +22,7 @@ const Header = ({ routeLogin }) => {
     <header className="h-20 bg-gray-100 flex justify-between p-4 items-center shadow-lg">
       <div className="flex gap-2 items-center text-pink-400">
         <SiFirebase className="text-3xl" />
-        <span className="text-2xl font-semibold">FireCart</span>
+        <span className="text-2xl font-semibold">FireCart v2</span>
       </div>
       {user ? (
         <button onClick={logOut}>Logout</button>

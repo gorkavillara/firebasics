@@ -5,7 +5,6 @@ import { initializeApp } from "firebase/app";
 import { getMessaging, getToken } from "firebase/messaging"
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 
-const db = getFirestore();
 
 const sendTokenToServer = async token => {
   // Chequear si ya lo hemos enviado, y si no, lo enviamos
@@ -36,6 +35,7 @@ export const app = initializeApp(firebaseConfig);
 export const messaging = getMessaging();
 
 // token = "ctVShBcRFzmgif90IFIr1X:APA91bF8ZjXkt2CeyB4wwCWV15f6iB7NC8tOQ-ebJ1ZWXDEDIP_t7-m5e8FNE6rBHo4tv5skSTVgQyQLNnSMlGX1JrcsLI9yhTMZ12Tro9pcmzM9IKrCQvpk1bl46RTVedG7t7-DgT6X"
+const db = getFirestore();
 
 getToken(messaging, { vapidKey }).then((currentToken) => {
   if (currentToken) {

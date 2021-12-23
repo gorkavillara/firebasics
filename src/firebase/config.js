@@ -3,6 +3,21 @@ import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 import { getMessaging, getToken } from "firebase/messaging"
+import { getFirestore, collection, addDoc } from "firebase/firestore";
+
+const db = getFirestore();
+
+const sendTokenToServer = async token => {
+  // Chequear si ya lo hemos enviado, y si no, lo enviamos
+  if (localStorage.getItem('sentToServer') === '1') return;
+  try {
+    const docRef = await addDoc(collection(db, "tokens"), { token });
+    localStorage.setItem('sentToServer', '1');
+    console.log("Document written with ID: ", docRef.id);
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+}
 
 const vapidKey = "BIBpYoLUvvcLC41c2xjVFGg7IsdeOOBSo3fIThYt4hMtV2nm-doU5Hofqyye_CuW6NjjWpXB7hJGIBEz658oeXA";
 
@@ -25,7 +40,8 @@ export const messaging = getMessaging();
 getToken(messaging, { vapidKey }).then((currentToken) => {
   if (currentToken) {
     // Send the token to your server and update the UI if necessary
-    console.log(currentToken);
+    // console.log(currentToken);
+    sendTokenToServer(currentToken);
     // ...
   } else {
     // Show permission request UI

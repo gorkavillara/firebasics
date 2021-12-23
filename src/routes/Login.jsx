@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { LogInContext } from "../App";
-import { SiReactrouter } from "react-icons/si";
 
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
